@@ -13,22 +13,36 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
+            line-height: 1.8;
+            color: #1a202c;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+        }
+
+        /* Scroll Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, #f59e0b, #3b82f6, #10b981);
+            z-index: 10000;
+            transition: width 0.1s;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             background: white;
-            box-shadow: 0 0 40px rgba(0,0,0,0.3);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border-radius: 0;
         }
 
         header {
-            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #2563eb 100%);
             color: white;
-            padding: 60px 40px;
+            padding: 50px 40px;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -37,12 +51,17 @@
         header::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.05)"/></svg>');
-            opacity: 0.1;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 15s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
         }
 
         .header-content {
@@ -51,30 +70,37 @@
         }
 
         h1 {
-            font-size: 3em;
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 4px 8px rgba(0,0,0,0.3);
+            font-weight: 700;
+            letter-spacing: -1px;
         }
 
         .subtitle {
-            font-size: 1.3em;
-            opacity: 0.9;
-            margin-bottom: 25px;
+            font-size: 1.5em;
+            opacity: 0.95;
+            margin-bottom: 30px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
         }
 
         .author-info {
-            font-size: 1em;
-            opacity: 0.8;
-            margin-top: 20px;
+            font-size: 1.05em;
+            opacity: 0.9;
+            margin-top: 25px;
+            font-weight: 400;
         }
 
         nav {
-            background: #1e293b;
+            background: rgba(30, 41, 59, 0.95);
+            backdrop-filter: blur(10px);
             padding: 0;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            border-bottom: 2px solid rgba(59, 130, 246, 0.3);
         }
 
         nav ul {
@@ -92,14 +118,32 @@
             display: block;
             color: white;
             text-decoration: none;
-            padding: 15px 20px;
-            transition: all 0.3s;
+            padding: 18px 24px;
+            transition: all 0.3s ease;
             font-weight: 500;
+            position: relative;
+            font-size: 0.95em;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: #3b82f6;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
         }
 
         nav ul li a:hover {
-            background: #3b82f6;
+            background: rgba(59, 130, 246, 0.2);
             transform: translateY(-2px);
+        }
+
+        nav ul li a:hover::after {
+            width: 80%;
         }
 
         .content {
@@ -124,37 +168,55 @@
 
         h2 {
             color: #1e3a8a;
-            font-size: 2.2em;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 4px solid #3b82f6;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e5e7eb;
             position: relative;
+            font-weight: 700;
+            letter-spacing: -0.5px;
         }
 
         h2::after {
             content: '';
             position: absolute;
-            bottom: -4px;
+            bottom: -1px;
             left: 0;
-            width: 100px;
+            width: 120px;
             height: 4px;
-            background: #60a5fa;
+            background: linear-gradient(90deg, #3b82f6, #2563eb);
+            border-radius: 2px;
         }
 
         h3 {
             color: #1e40af;
-            font-size: 1.6em;
-            margin-top: 30px;
-            margin-bottom: 15px;
+            font-size: 1.75em;
+            margin-top: 35px;
+            margin-bottom: 18px;
+            font-weight: 600;
         }
 
         .highlight-box {
             background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
-            padding: 25px;
-            border-radius: 12px;
-            margin: 25px 0;
-            border-left: 5px solid #3b82f6;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 30px;
+            border-radius: 16px;
+            margin: 30px 0;
+            border-left: 6px solid #3b82f6;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(50%, -50%);
         }
 
         .info-grid {
@@ -165,88 +227,149 @@
         }
 
         .info-card {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-            border-top: 4px solid #3b82f6;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #2563eb, #1d4ed8);
         }
 
         .info-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15), 0 5px 15px rgba(0,0,0,0.08);
+            border-color: rgba(59, 130, 246, 0.3);
         }
 
         .info-card h4 {
             color: #1e40af;
-            font-size: 1.3em;
-            margin-bottom: 12px;
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            font-weight: 600;
         }
 
         .comparison-table {
             width: 100%;
-            border-collapse: collapse;
-            margin: 30px 0;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            border-radius: 12px;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 40px 0;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border-radius: 16px;
             overflow: hidden;
+            border: 1px solid rgba(59, 130, 246, 0.1);
         }
 
         .comparison-table thead {
-            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #2563eb 100%);
             color: white;
         }
 
         .comparison-table th {
-            padding: 18px;
+            padding: 22px;
             text-align: left;
             font-weight: 600;
+            font-size: 1.05em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .comparison-table td {
-            padding: 15px 18px;
+            padding: 18px 22px;
             border-bottom: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+        }
+
+        .comparison-table tbody tr {
+            transition: all 0.3s ease;
         }
 
         .comparison-table tbody tr:hover {
-            background: #f3f4f6;
+            background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%);
+            transform: scale(1.01);
         }
 
         .comparison-table tbody tr:nth-child(even) {
             background: #f9fafb;
         }
 
+        .comparison-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
         .pros-cons {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin: 30px 0;
+            gap: 35px;
+            margin: 40px 0;
         }
 
         .pros, .cons {
-            padding: 25px;
-            border-radius: 12px;
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
         }
 
         .pros {
             background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
-            border-left: 5px solid #10b981;
+            border-left: 6px solid #10b981;
+        }
+
+        .pros::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
         }
 
         .cons {
             background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
-            border-left: 5px solid #ef4444;
+            border-left: 6px solid #ef4444;
+        }
+
+        .cons::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(239, 68, 68, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .pros h3, .cons h3 {
+            position: relative;
+            z-index: 1;
         }
 
         .pros h3::before {
             content: '✓ ';
             color: #10b981;
+            font-size: 1.2em;
         }
 
         .cons h3::before {
             content: '✗ ';
             color: #ef4444;
+            font-size: 1.2em;
         }
 
         ul {
@@ -260,139 +383,286 @@
         }
 
         .stats-box {
-            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #2563eb 100%);
             color: white;
-            padding: 30px;
-            border-radius: 12px;
-            margin: 30px 0;
+            padding: 40px;
+            border-radius: 20px;
+            margin: 40px 0;
             text-align: center;
+            box-shadow: 0 20px 50px rgba(59, 130, 246, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
         }
 
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 25px;
+            gap: 25px;
+            margin-top: 30px;
+            position: relative;
+            z-index: 1;
         }
 
         .stat-item {
-            padding: 20px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 8px;
-            backdrop-filter: blur(10px);
+            padding: 25px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 12px;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.25);
         }
 
         .stat-number {
-            font-size: 2.5em;
-            font-weight: bold;
+            font-size: 3em;
+            font-weight: 700;
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
 
         .badge {
             display: inline-block;
-            padding: 6px 14px;
-            background: #3b82f6;
+            padding: 8px 18px;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
             color: white;
-            border-radius: 20px;
-            font-size: 0.85em;
+            border-radius: 25px;
+            font-size: 0.9em;
             font-weight: 600;
             margin: 5px;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
         }
 
         .badge.green {
-            background: #10b981;
+            background: linear-gradient(135deg, #10b981, #059669);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .badge.green:hover {
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
         }
 
         .badge.red {
-            background: #ef4444;
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+        }
+
+        .badge.red:hover {
+            box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
         }
 
         .badge.orange {
-            background: #f59e0b;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        }
+
+        .badge.orange:hover {
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
         }
 
         footer {
-            background: #1e293b;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
             color: white;
             text-align: center;
-            padding: 30px;
+            padding: 50px 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #3b82f6, #2563eb, #1d4ed8);
         }
 
         .footer-content {
             max-width: 800px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-content h3 {
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            color: white;
         }
 
         .footer-links {
-            margin-top: 15px;
+            margin-top: 20px;
         }
 
         .footer-links a {
             color: #60a5fa;
             text-decoration: none;
-            margin: 0 15px;
-            transition: color 0.3s;
+            margin: 0 20px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            display: inline-block;
         }
 
         .footer-links a:hover {
             color: #93c5fd;
+            transform: translateY(-2px);
         }
 
         .quote-box {
-            background: #f9fafb;
-            border-left: 5px solid #3b82f6;
-            padding: 25px 30px;
-            margin: 30px 0;
+            background: linear-gradient(135deg, #f9fafb 0%, #f1f5f9 100%);
+            border-left: 6px solid #3b82f6;
+            padding: 35px 40px;
+            margin: 35px 0;
             font-style: italic;
-            font-size: 1.2em;
+            font-size: 1.3em;
             color: #1e40af;
-            border-radius: 0 12px 12px 0;
+            border-radius: 0 16px 16px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quote-box::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 6em;
+            color: rgba(59, 130, 246, 0.1);
+            font-family: Georgia, serif;
+            line-height: 1;
         }
 
         @media (max-width: 768px) {
             h1 {
-                font-size: 2em;
+                font-size: 2.5em;
+            }
+
+            .subtitle {
+                font-size: 1.2em;
+            }
+
+            header {
+                padding: 50px 20px;
             }
 
             .pros-cons {
                 grid-template-columns: 1fr;
+                gap: 20px;
             }
 
             nav ul {
                 flex-direction: column;
             }
 
+            nav ul li a {
+                padding: 15px 20px;
+            }
+
             .content {
                 padding: 20px;
+            }
+
+            h2 {
+                font-size: 2em;
+            }
+
+            h3 {
+                font-size: 1.4em;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-table {
+                font-size: 0.85em;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 12px;
+            }
+
+            .stats-box {
+                padding: 25px 20px;
+            }
+
+            .stat-number {
+                font-size: 2.2em;
+            }
+
+            .quote-box {
+                font-size: 1.1em;
+                padding: 25px 20px;
+            }
+
+            footer {
+                padding: 35px 20px;
+            }
+
+            .footer-links a {
+                display: block;
+                margin: 10px 0;
             }
         }
 
         .osi-model {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            margin: 30px 0;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            margin: 40px 0;
+            border: 1px solid rgba(59, 130, 246, 0.1);
         }
 
         .layer {
-            padding: 15px;
-            margin: 8px 0;
-            border-radius: 8px;
+            padding: 20px 25px;
+            margin: 10px 0;
+            border-radius: 12px;
             font-weight: 600;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.05);
         }
 
-        .layer-7 { background: #dbeafe; color: #1e40af; }
-        .layer-6 { background: #bfdbfe; color: #1e40af; }
-        .layer-5 { background: #93c5fd; color: #1e3a8a; }
-        .layer-4 { background: #fcd34d; color: #92400e; }
-        .layer-3 { background: #fca5a5; color: #991b1b; }
-        .layer-2 { background: #86efac; color: #166534; }
-        .layer-1 { background: #86efac; color: #166534; }
+        .layer:hover {
+            transform: translateX(10px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .layer-7 { background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); color: #1e40af; }
+        .layer-6 { background: linear-gradient(135deg, #bfdbfe 0%, #93c5fd 100%); color: #1e40af; }
+        .layer-5 { background: linear-gradient(135deg, #93c5fd 0%, #60a5fa 100%); color: #1e3a8a; }
+        .layer-4 { background: linear-gradient(135deg, #fcd34d 0%, #fbbf24 100%); color: #92400e; }
+        .layer-3 { background: linear-gradient(135deg, #fca5a5 0%, #f87171 100%); color: #991b1b; }
+        .layer-2 { background: linear-gradient(135deg, #86efac 0%, #6ee7b7 100%); color: #166534; }
+        .layer-1 { background: linear-gradient(135deg, #6ee7b7 0%, #34d399 100%); color: #166534; }
 
         .scroll-top {
             position: fixed;
@@ -422,18 +692,747 @@
             background: #2563eb;
             transform: translateY(-5px);
         }
+
+        /* Flip Card Styles */
+        .flip-card {
+            perspective: 1000px;
+            height: 100%;
+            min-height: 300px;
+            cursor: pointer;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 16px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .flip-card-front {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .flip-card-back {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        .flip-indicator {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 0.8em;
+            opacity: 0.6;
+            font-style: italic;
+        }
+
+        /* Accordion Styles */
+        .accordion {
+            margin: 20px 0;
+        }
+
+        .accordion-item {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            overflow: hidden;
+            border: 1px solid rgba(59, 130, 246, 0.1);
+        }
+
+        .accordion-header {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            padding: 20px 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: #1e40af;
+            transition: all 0.3s ease;
+        }
+
+        .accordion-header:hover {
+            background: linear-gradient(135deg, #bfdbfe 0%, #93c5fd 100%);
+        }
+
+        .accordion-header::after {
+            content: '+';
+            font-size: 1.5em;
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-header.active::after {
+            transform: rotate(45deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            padding: 0 25px;
+        }
+
+        .accordion-content.active {
+            padding: 25px;
+            max-height: 2000px;
+        }
+
+        /* Tab Styles */
+        .tabs {
+            margin: 30px 0;
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .tab-button {
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #475569;
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .tab-button:hover {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            color: #1e40af;
+        }
+
+        .tab-button.active {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            border-color: #1d4ed8;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Interactive Layer Styles */
+        .layer.interactive {
+            cursor: pointer;
+            position: relative;
+        }
+
+        .layer-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            margin-top: 0;
+            padding: 0 25px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 8px;
+        }
+
+        .layer.active .layer-details {
+            max-height: 500px;
+            margin-top: 15px;
+            padding: 20px 25px;
+        }
+
+        .layer::after {
+            content: '▼';
+            font-size: 0.8em;
+            margin-left: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .layer.active::after {
+            transform: rotate(180deg);
+        }
+
+        /* Pulse Animation for Interactive Elements */
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow: 0 10px 30px rgba(59, 130, 246, 0.15);
+            }
+            50% {
+                box-shadow: 0 10px 40px rgba(59, 130, 246, 0.3);
+            }
+        }
+
+        .interactive-hint {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        /* Quiz Styles */
+        .quiz-container {
+            background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+            padding: 50px;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(59, 130, 246, 0.3);
+            margin: 40px 0;
+            border: 3px solid #3b82f6;
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .quiz-header h2 {
+            color: #1e40af;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .quiz-progress {
+            background: #e2e8f0;
+            height: 12px;
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 30px 0;
+        }
+
+        .quiz-progress-bar {
+            background: linear-gradient(90deg, #3b82f6, #10b981);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .question-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            display: none;
+            animation: slideInUp 0.5s ease;
+        }
+
+        .question-card.active {
+            display: block;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .question-number {
+            color: #3b82f6;
+            font-weight: 700;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+
+        .question-text {
+            font-size: 1.5em;
+            color: #1e40af;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .answer-option {
+            background: linear-gradient(135deg, #f9fafb 0%, #f1f5f9 100%);
+            padding: 20px 25px;
+            margin: 15px 0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            font-size: 1.1em;
+        }
+
+        .answer-option:hover {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            border-color: #3b82f6;
+            transform: translateX(5px);
+        }
+
+        .answer-option.selected {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            border-color: #1d4ed8;
+        }
+
+        .answer-option.correct {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border-color: #047857;
+            animation: correctPulse 0.6s ease;
+        }
+
+        .answer-option.incorrect {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+            border-color: #b91c1c;
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes correctPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .quiz-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            justify-content: center;
+        }
+
+        .quiz-button {
+            padding: 15px 40px;
+            font-size: 1.1em;
+            font-weight: 600;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .quiz-button.primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+        }
+
+        .quiz-button.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .quiz-button.secondary {
+            background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+            color: white;
+        }
+
+        .quiz-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .quiz-results {
+            text-align: center;
+            display: none;
+        }
+
+        .quiz-results.active {
+            display: block;
+        }
+
+        .score-display {
+            font-size: 5em;
+            font-weight: 700;
+            color: #3b82f6;
+            margin: 30px 0;
+            text-shadow: 2px 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .result-message {
+            font-size: 2em;
+            color: #1e40af;
+            margin: 20px 0;
+            font-weight: 600;
+        }
+
+        .result-details {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* Confetti Canvas */
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* Quiz Button in Header */
+        .quiz-cta {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1.1em;
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            box-shadow: 0 10px 30px rgba(245, 158, 11, 0.4);
+            animation: bounce 2s ease-in-out infinite;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-cta:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(245, 158, 11, 0.6);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .answer-label {
+            width: 35px;
+            height: 35px;
+            background: #3b82f6;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .answer-option.selected .answer-label,
+        .answer-option.correct .answer-label,
+        .answer-option.incorrect .answer-label {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* ========== HERO SECTION STYLES ========== */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+        }
+
+        /* Animated Network Background */
+        #network-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        /* Hero Content */
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+            max-width: 900px;
+            padding: 40px;
+            animation: heroFadeIn 1.5s ease-out;
+        }
+
+        @keyframes heroFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-title {
+            font-size: 6em;
+            font-weight: 900;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 50%, #93c5fd 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 80px rgba(59, 130, 246, 0.5);
+            letter-spacing: -2px;
+            animation: titleGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes titleGlow {
+            0%, 100% {
+                filter: brightness(1);
+                text-shadow: 0 0 80px rgba(59, 130, 246, 0.5);
+            }
+            50% {
+                filter: brightness(1.2);
+                text-shadow: 0 0 120px rgba(59, 130, 246, 0.8);
+            }
+        }
+
+        .hero-tagline {
+            font-size: 2em;
+            font-weight: 300;
+            margin-bottom: 15px;
+            color: #cbd5e1;
+            letter-spacing: 2px;
+            animation: fadeInUp 1.5s ease-out 0.3s both;
+        }
+
+        .hero-description {
+            font-size: 1.3em;
+            color: #94a3b8;
+            margin-bottom: 50px;
+            line-height: 1.6;
+            animation: fadeInUp 1.5s ease-out 0.6s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px 50px;
+            font-size: 1.3em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            box-shadow: 0 20px 60px rgba(59, 130, 246, 0.4);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: fadeInUp 1.5s ease-out 0.9s both;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 30px 80px rgba(59, 130, 246, 0.6);
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+        }
+
+        .hero-cta::after {
+            content: '↓';
+            font-size: 1.3em;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            animation: fadeInUp 1.5s ease-out 1.2s both;
+        }
+
+        .scroll-indicator .mouse {
+            width: 30px;
+            height: 50px;
+            border: 3px solid #60a5fa;
+            border-radius: 20px;
+            position: relative;
+            margin: 0 auto 10px;
+        }
+
+        .scroll-indicator .mouse::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 8px;
+            background: #60a5fa;
+            border-radius: 2px;
+            animation: scrollDown 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollDown {
+            0% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px);
+            }
+        }
+
+        .scroll-indicator span {
+            display: block;
+            color: #60a5fa;
+            font-size: 0.9em;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Floating Tech Icons */
+        .tech-icons {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .tech-icon {
+            position: absolute;
+            font-size: 3em;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .tech-icon:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .tech-icon:nth-child(2) { top: 20%; right: 15%; animation-delay: 1s; }
+        .tech-icon:nth-child(3) { bottom: 20%; left: 20%; animation-delay: 2s; }
+        .tech-icon:nth-child(4) { bottom: 15%; right: 10%; animation-delay: 3s; }
+        .tech-icon:nth-child(5) { top: 50%; left: 5%; animation-delay: 1.5s; }
+        .tech-icon:nth-child(6) { top: 50%; right: 5%; animation-delay: 2.5s; }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-30px) rotate(10deg);
+            }
+        }
+
+        /* Responsive Hero Section */
+        @media (max-width: 768px) {
+            .hero-section {
+                min-height: 600px;
+            }
+
+            .hero-title {
+                font-size: 3.5em;
+            }
+
+            .hero-tagline {
+                font-size: 1.3em;
+            }
+
+            .hero-description {
+                font-size: 1.1em;
+            }
+
+            .hero-cta {
+                padding: 15px 35px;
+                font-size: 1.1em;
+            }
+
+            .tech-icon {
+                font-size: 2em;
+            }
+        }
+
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
     </style>
 </head>
 <body>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <canvas id="network-canvas"></canvas>
+
+        <!-- Floating Tech Icons -->
+        <div class="tech-icons">
+            <div class="tech-icon">⚙️</div>
+            <div class="tech-icon">🔌</div>
+            <div class="tech-icon">🌐</div>
+            <div class="tech-icon">📡</div>
+            <div class="tech-icon">⚡</div>
+            <div class="tech-icon">🔧</div>
+        </div>
+
+        <div class="hero-content">
+            <h1 class="hero-title">EtherNet/IP</h1>
+            <div class="hero-tagline">INDUSTRIE 4.0</div>
+            <p class="hero-description">
+                Die Zukunft der industriellen Kommunikation<br>
+                Entdecke das Ethernet-Protokoll für moderne Automatisierung
+            </p>
+            <a href="#grundlagen" class="hero-cta">
+                Jetzt eintauchen
+            </a>
+        </div>
+
+        <div class="scroll-indicator">
+            <div class="mouse"></div>
+            <span>Scroll</span>
+        </div>
+    </section>
+
+    <div class="progress-bar" id="progressBar"></div>
     <div class="container">
         <header>
             <div class="header-content">
-                <h1>EtherNet/IP</h1>
-                <div class="subtitle">Das Ethernet-Protokoll für die Industrie 4.0</div>
+                <h1 style="font-size: 2em; margin-bottom: 15px;">Präsentationshandout</h1>
+                <div class="subtitle" style="font-size: 1.2em;">EtherNet/IP - Das Ethernet-Protokoll für die Industrie 4.0</div>
                 <div class="author-info">
                     Benjamin Herrmann | HRL-TVT 4.5 | 10.11.2025<br>
                     Robert Bosch GmbH
                 </div>
+                <a href="#quiz" class="quiz-cta">🎯 Teste dein Wissen! Quiz starten</a>
             </div>
         </header>
 
@@ -469,77 +1468,174 @@
                     <p>Keine teure Spezial-Hardware nötig – nutzt dieselbe Technologie wie ein Router zu Hause!</p>
                 </div>
 
-                <h3>Technische Grundlage</h3>
+                <h3>Technische Grundlage <span style="font-size: 0.6em; color: #3b82f6;">🔄 Klicke auf die Karten!</span></h3>
                 <div class="info-grid">
-                    <div class="info-card">
-                        <h4>Basis</h4>
-                        <p>Standard-Ethernet (Layer 1 + 2)</p>
-                        <p>TCP/IP und UDP (Layer 3 + 4)</p>
-                        <p>CIP auf Layer 5-7 (Anwendung)</p>
+                    <div class="flip-card interactive-hint">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <h4>Basis</h4>
+                                <p>Standard-Ethernet (Layer 1 + 2)</p>
+                                <p>TCP/IP und UDP (Layer 3 + 4)</p>
+                                <p>CIP auf Layer 5-7 (Anwendung)</p>
+                                <div class="flip-indicator">Klick mich! 🔄</div>
+                            </div>
+                            <div class="flip-card-back">
+                                <h4>📡 Mehr Details</h4>
+                                <p style="text-align: left; margin-top: 15px;"><strong>Layer 1-2:</strong> Standard Ethernet wie zu Hause - keine Spezial-Hardware nötig!</p>
+                                <p style="text-align: left;"><strong>Layer 3-4:</strong> IP-Routing wie im Internet - IT-Kenntnisse sind nutzbar!</p>
+                                <p style="text-align: left;"><strong>Layer 5-7:</strong> CIP (Common Industrial Protocol) - Die "Sprache" der Maschinen</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="info-card">
-                        <h4>Geschwindigkeit</h4>
-                        <p>10/100/1000 Mbit/s</p>
-                        <p>Zykluszeit: 1-100 ms</p>
-                        <p>Soft-Realtime</p>
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <h4>Geschwindigkeit</h4>
+                                <p>10/100/1000 Mbit/s</p>
+                                <p>Zykluszeit: 1-100 ms</p>
+                                <p>Soft-Realtime</p>
+                                <div class="flip-indicator">Klick mich! 🔄</div>
+                            </div>
+                            <div class="flip-card-back">
+                                <h4>⚡ Performance-Details</h4>
+                                <p style="text-align: left; margin-top: 15px;"><strong>10/100/1000 Mbit/s:</strong> Automatische Geschwindigkeits-Anpassung</p>
+                                <p style="text-align: left;"><strong>1-100 ms:</strong> Schneller als ein Wimpernschlag!</p>
+                                <p style="text-align: left;"><strong>Soft-Realtime:</strong> Garantierte max. Reaktionszeit für 90% aller Anwendungen</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="info-card">
-                        <h4>Verbreitung</h4>
-                        <p>Über 30 Millionen installierte Knoten weltweit</p>
-                        <p>Hauptsächlich USA & Asien</p>
-                        <p>Hersteller: Rockwell Automation</p>
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <h4>Verbreitung</h4>
+                                <p>Über 30 Millionen installierte Knoten weltweit</p>
+                                <p>Hauptsächlich USA & Asien</p>
+                                <p>Hersteller: Rockwell Automation</p>
+                                <div class="flip-indicator">Klick mich! 🔄</div>
+                            </div>
+                            <div class="flip-card-back">
+                                <h4>🌍 Weltweite Nutzung</h4>
+                                <p style="text-align: left; margin-top: 15px;"><strong>30+ Millionen Knoten:</strong> Bewährte Technologie mit riesigem Ökosystem</p>
+                                <p style="text-align: left;"><strong>USA & Asien:</strong> Standard in der amerikanischen und asiatischen Industrie</p>
+                                <p style="text-align: left;"><strong>Rockwell:</strong> Allen-Bradley, größter Anbieter von Industrie-Automation</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <h3>OSI-Modell</h3>
+                <h3>OSI-Modell <span style="font-size: 0.6em; color: #3b82f6;">👆 Klicke auf die Layer für Details!</span></h3>
                 <div class="osi-model">
-                    <div class="layer layer-7">
-                        <span>Layer 7 - Anwendung</span>
-                        <span>CIP</span>
+                    <div class="layer layer-7 interactive">
+                        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                            <span>Layer 7 - Anwendung</span>
+                            <span>CIP</span>
+                        </div>
+                        <div class="layer-details">
+                            <p><strong>CIP - Common Industrial Protocol</strong></p>
+                            <p>Hier findet die eigentliche industrielle Kommunikation statt: Geräte-Konfiguration, Datenaustasch, Diagnose</p>
+                        </div>
                     </div>
-                    <div class="layer layer-6">
-                        <span>Layer 6 - Darstellung</span>
-                        <span>CIP</span>
+                    <div class="layer layer-6 interactive">
+                        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                            <span>Layer 6 - Darstellung</span>
+                            <span>CIP</span>
+                        </div>
+                        <div class="layer-details">
+                            <p><strong>Datendarstellung</strong></p>
+                            <p>CIP übersetzt industrielle Datentypen (z.B. Temperatur, Druck) in ein einheitliches Format</p>
+                        </div>
                     </div>
-                    <div class="layer layer-5">
-                        <span>Layer 5 - Sitzung</span>
-                        <span>CIP</span>
+                    <div class="layer layer-5 interactive">
+                        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                            <span>Layer 5 - Sitzung</span>
+                            <span>CIP</span>
+                        </div>
+                        <div class="layer-details">
+                            <p><strong>Verbindungsmanagement</strong></p>
+                            <p>CIP verwaltet die Verbindungen zwischen Geräten (wer kommuniziert mit wem?)</p>
+                        </div>
                     </div>
-                    <div class="layer layer-4">
-                        <span>Layer 4 - Transport</span>
-                        <span>TCP / UDP</span>
+                    <div class="layer layer-4 interactive">
+                        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                            <span>Layer 4 - Transport</span>
+                            <span>TCP / UDP</span>
+                        </div>
+                        <div class="layer-details">
+                            <p><strong>TCP:</strong> Zuverlässig für Konfiguration & Diagnose (garantierte Zustellung)</p>
+                            <p><strong>UDP:</strong> Schnell für Echtzeit-I/O (minimale Latenz, Multicast möglich)</p>
+                        </div>
                     </div>
-                    <div class="layer layer-3">
-                        <span>Layer 3 - Vermittlung</span>
-                        <span>IP</span>
+                    <div class="layer layer-3 interactive">
+                        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                            <span>Layer 3 - Vermittlung</span>
+                            <span>IP</span>
+                        </div>
+                        <div class="layer-details">
+                            <p><strong>Internet Protocol</strong></p>
+                            <p>Standard-IP-Routing wie im Internet - DHCP, statische IPs, Subnetting funktionieren wie gewohnt!</p>
+                        </div>
                     </div>
-                    <div class="layer layer-2">
-                        <span>Layer 2 - Sicherung</span>
-                        <span>Ethernet</span>
+                    <div class="layer layer-2 interactive">
+                        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                            <span>Layer 2 - Sicherung</span>
+                            <span>Ethernet</span>
+                        </div>
+                        <div class="layer-details">
+                            <p><strong>Ethernet Frame</strong></p>
+                            <p>Standard Ethernet 802.3 - MAC-Adressen, Switches, VLANs - alles funktioniert wie im Büro-Netzwerk</p>
+                        </div>
                     </div>
-                    <div class="layer layer-1">
-                        <span>Layer 1 - Bitübertragung</span>
-                        <span>Ethernet (Kabel)</span>
+                    <div class="layer layer-1 interactive">
+                        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                            <span>Layer 1 - Bitübertragung</span>
+                            <span>Ethernet (Kabel)</span>
+                        </div>
+                        <div class="layer-details">
+                            <p><strong>Physische Übertragung</strong></p>
+                            <p>Standard CAT5e/CAT6 Kabel mit RJ45-Steckern - günstig und überall verfügbar! Bis zu 100m pro Strecke</p>
+                        </div>
                     </div>
                 </div>
 
                 <h3>Zwei Kommunikationswege</h3>
                 <div class="info-grid">
-                    <div class="info-card">
-                        <h4>1. Implicit Messages (I/O)</h4>
-                        <p><span class="badge green">UDP</span></p>
-                        <p>✓ Schnell & zyklisch</p>
-                        <p>✓ Alle 10-100ms</p>
-                        <p>✓ Für Sensoren & Aktoren</p>
-                        <p>✓ Multicast möglich</p>
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <h4>1. Implicit Messages (I/O)</h4>
+                                <p><span class="badge green">UDP</span></p>
+                                <p>✓ Schnell & zyklisch</p>
+                                <p>✓ Alle 10-100ms</p>
+                                <p>✓ Für Sensoren & Aktoren</p>
+                                <p>✓ Multicast möglich</p>
+                                <div class="flip-indicator">Mehr Details 🔄</div>
+                            </div>
+                            <div class="flip-card-back">
+                                <h4>🚀 Implicit I/O</h4>
+                                <p style="text-align: left; margin-top: 10px;"><strong>UDP = User Datagram Protocol</strong></p>
+                                <p style="text-align: left;">Wie ein Brief ohne Empfangsbestätigung - schnell aber ohne Garantie!</p>
+                                <p style="text-align: left; margin-top: 10px;"><strong>Anwendung:</strong> Temperatursensor sendet alle 50ms seinen Wert. Wenn ein Paket verloren geht, kommt 50ms später das nächste!</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="info-card">
-                        <h4>2. Explicit Messages (Config)</h4>
-                        <p><span class="badge orange">TCP</span></p>
-                        <p>✓ Zuverlässig, bei Bedarf</p>
-                        <p>✓ Point-to-Point</p>
-                        <p>✓ Für Konfiguration & Diagnose</p>
-                        <p>✓ File-Transfer</p>
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <h4>2. Explicit Messages (Config)</h4>
+                                <p><span class="badge orange">TCP</span></p>
+                                <p>✓ Zuverlässig, bei Bedarf</p>
+                                <p>✓ Point-to-Point</p>
+                                <p>✓ Für Konfiguration & Diagnose</p>
+                                <p>✓ File-Transfer</p>
+                                <div class="flip-indicator">Mehr Details 🔄</div>
+                            </div>
+                            <div class="flip-card-back">
+                                <h4>📦 Explicit Messages</h4>
+                                <p style="text-align: left; margin-top: 10px;"><strong>TCP = Transmission Control Protocol</strong></p>
+                                <p style="text-align: left;">Wie ein Einschreiben - Empfang wird bestätigt, nichts geht verloren!</p>
+                                <p style="text-align: left; margin-top: 10px;"><strong>Anwendung:</strong> Firmware-Update, Gerätekonfiguration, Fehlerdiagnose - hier darf nichts verloren gehen!</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -830,48 +1926,99 @@
                     </ul>
                 </div>
 
-                <h3>Technologie</h3>
-                <div class="info-grid">
-                    <div class="info-card">
-                        <h4>🔒 TLS/DTLS Verschlüsselung</h4>
-                        <p>Wie HTTPS im Browser</p>
-                        <ul>
-                            <li>TLS für TCP-Verbindungen</li>
-                            <li>DTLS für UDP-Verbindungen</li>
-                            <li>AES-Verschlüsselung</li>
-                        </ul>
-                    </div>
-                    <div class="info-card">
-                        <h4>🎫 X.509 Zertifikate</h4>
-                        <p>Jedes Gerät bekommt ein digitales Zertifikat</p>
-                        <p>→ Eindeutige Authentifizierung</p>
-                    </div>
-                </div>
+                <h3>Sicherheits-Features <span style="font-size: 0.6em; color: #3b82f6;">📋 Klick auf die Themen!</span></h3>
 
-                <h3>Features</h3>
-                <div class="info-grid">
-                    <div class="info-card">
-                        <h4>Ende-zu-Ende-Verschlüsselung</h4>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>🔒 TLS/DTLS Verschlüsselung</span>
+                        </div>
+                        <div class="accordion-content">
+                            <h4>Wie HTTPS im Browser - nur für die Industrie!</h4>
+                            <div class="info-grid" style="margin-top: 15px;">
+                                <div class="info-card">
+                                    <h4>TLS (Transport Layer Security)</h4>
+                                    <p>Für TCP-Verbindungen</p>
+                                    <p>→ Konfiguration & Diagnose verschlüsselt</p>
+                                </div>
+                                <div class="info-card">
+                                    <h4>DTLS (Datagram TLS)</h4>
+                                    <p>Für UDP-Verbindungen</p>
+                                    <p>→ Echtzeit-I/O verschlüsselt</p>
+                                </div>
+                                <div class="info-card">
+                                    <h4>AES-Verschlüsselung</h4>
+                                    <p>Militär-Standard</p>
+                                    <p>→ Praktisch unknackbar</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="info-card">
-                        <h4>Benutzer-Authentifizierung</h4>
-                    </div>
-                    <div class="info-card">
-                        <h4>Zugriffskontrolle</h4>
-                        <p>(wer darf was?)</p>
-                    </div>
-                    <div class="info-card">
-                        <h4>Man-in-the-Middle Erkennung</h4>
-                    </div>
-                </div>
 
-                <h3>Defense-in-Depth (3 Sicherheitsschichten)</h3>
-                <div class="highlight-box">
-                    <ol>
-                        <li><strong>Firewall (Netzwerk)</strong></li>
-                        <li><strong>Network Segmentation</strong></li>
-                        <li><strong>CIP Security (Gerät)</strong> ← Letzte Verteidigung!</li>
-                    </ol>
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>🎫 X.509 Zertifikate & Authentifizierung</span>
+                        </div>
+                        <div class="accordion-content">
+                            <h4>Digitale Ausweise für jedes Gerät</h4>
+                            <p style="margin-top: 15px;">Jedes Gerät bekommt ein eindeutiges digitales Zertifikat - wie ein Personalausweis!</p>
+                            <ul style="margin-top: 15px;">
+                                <li><strong>Geräte-Authentifizierung:</strong> Nur autorisierte Geräte dürfen kommunizieren</li>
+                                <li><strong>Benutzer-Authentifizierung:</strong> Nur berechtigte Personen haben Zugriff</li>
+                                <li><strong>Zertifikats-Hierarchie:</strong> Zentrale Verwaltung über Certificate Authority (CA)</li>
+                                <li><strong>Automatische Überprüfung:</strong> Abgelaufene oder widerrufene Zertifikate werden blockiert</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>🛡️ Sicherheits-Features im Detail</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="info-grid">
+                                <div class="info-card">
+                                    <h4>Ende-zu-Ende-Verschlüsselung</h4>
+                                    <p>Daten werden direkt auf dem Gerät ver- und entschlüsselt. Niemand dazwischen kann mitlesen!</p>
+                                </div>
+                                <div class="info-card">
+                                    <h4>Zugriffskontrolle (ACL)</h4>
+                                    <p>Definiere präzise: Wer darf was? Lesen? Schreiben? Konfigurieren?</p>
+                                </div>
+                                <div class="info-card">
+                                    <h4>Man-in-the-Middle Erkennung</h4>
+                                    <p>Angreifer, die sich zwischen zwei Geräte schalten wollen, werden sofort erkannt und blockiert!</p>
+                                </div>
+                                <div class="info-card">
+                                    <h4>Replay-Attack Schutz</h4>
+                                    <p>Alte Nachrichten können nicht noch einmal gesendet werden (Timestamps & Nonces)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>🔐 Defense-in-Depth (3 Sicherheitsschichten)</span>
+                        </div>
+                        <div class="accordion-content">
+                            <h4>Mehrschichtige Verteidigung - wie bei einer Burg!</h4>
+                            <div style="margin-top: 20px;">
+                                <div class="info-card" style="margin-bottom: 15px;">
+                                    <h4>Schicht 1: Firewall (Netzwerk)</h4>
+                                    <p>Die äußere Mauer - blockiert Angriffe von außen, bevor sie überhaupt das Netzwerk erreichen</p>
+                                </div>
+                                <div class="info-card" style="margin-bottom: 15px;">
+                                    <h4>Schicht 2: Network Segmentation</h4>
+                                    <p>Der innere Burggraben - trennt verschiedene Bereiche (z.B. Produktion von Büro-IT)</p>
+                                </div>
+                                <div class="info-card">
+                                    <h4>Schicht 3: CIP Security (Gerät)</h4>
+                                    <p>Der Thronsaal - selbst wenn ein Angreifer bis hierhin kommt, ist jedes Gerät individuell geschützt!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -994,8 +2141,17 @@
 
             <section id="vergleich">
                 <h2>X. Vergleich mit anderen Feldbus-Systemen</h2>
-                
-                <table class="comparison-table">
+
+                <div class="tabs">
+                    <div class="tab-buttons">
+                        <button class="tab-button active" data-tab="overview">Übersicht</button>
+                        <button class="tab-button" data-tab="ethernet-ip">EtherNet/IP</button>
+                        <button class="tab-button" data-tab="profinet">PROFINET</button>
+                        <button class="tab-button" data-tab="ethercat">EtherCAT</button>
+                    </div>
+
+                    <div class="tab-content active" id="overview">
+                        <table class="comparison-table">
                     <thead>
                         <tr>
                             <th>Eigenschaft</th>
@@ -1049,6 +2205,114 @@
                         </tr>
                     </tbody>
                 </table>
+                    </div>
+
+                    <div class="tab-content" id="ethernet-ip">
+                        <div class="highlight-box">
+                            <h3>EtherNet/IP im Detail</h3>
+                            <div class="info-grid" style="margin-top: 20px;">
+                                <div class="info-card">
+                                    <h4>🌟 Hauptmerkmale</h4>
+                                    <ul style="text-align: left;">
+                                        <li>Offener Standard (ODVA)</li>
+                                        <li>Standard Ethernet + TCP/IP + UDP</li>
+                                        <li>CIP auf Application Layer</li>
+                                        <li>30+ Millionen Knoten weltweit</li>
+                                    </ul>
+                                </div>
+                                <div class="info-card">
+                                    <h4>✅ Ideale Anwendungen</h4>
+                                    <ul style="text-align: left;">
+                                        <li>Montagelinien</li>
+                                        <li>Verpackungsanlagen</li>
+                                        <li>Prozessautomation</li>
+                                        <li>IT/OT-Integration</li>
+                                        <li>Cloud-Anbindung</li>
+                                    </ul>
+                                </div>
+                                <div class="info-card">
+                                    <h4>🎯 Marktposition</h4>
+                                    <ul style="text-align: left;">
+                                        <li>Führend in USA</li>
+                                        <li>Stark in Asien</li>
+                                        <li>Rockwell Automation</li>
+                                        <li>Allen-Bradley Produkte</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="profinet">
+                        <div class="highlight-box">
+                            <h3>PROFINET im Detail</h3>
+                            <div class="info-grid" style="margin-top: 20px;">
+                                <div class="info-card">
+                                    <h4>🌟 Hauptmerkmale</h4>
+                                    <ul style="text-align: left;">
+                                        <li>Von Siemens entwickelt</li>
+                                        <li>Hard-Realtime möglich (IRT)</li>
+                                        <li>0,25-100 ms Zykluszeit</li>
+                                        <li>65+ Millionen Knoten weltweit</li>
+                                    </ul>
+                                </div>
+                                <div class="info-card">
+                                    <h4>✅ Ideale Anwendungen</h4>
+                                    <ul style="text-align: left;">
+                                        <li>Automotive-Industrie</li>
+                                        <li>Schnelle Motion Control</li>
+                                        <li>Robotik (mittel-schnell)</li>
+                                        <li>Siemens-Umgebung</li>
+                                    </ul>
+                                </div>
+                                <div class="info-card">
+                                    <h4>🎯 Marktposition</h4>
+                                    <ul style="text-align: left;">
+                                        <li>Marktführer in Europa</li>
+                                        <li>Stark in Deutschland</li>
+                                        <li>Siemens-Ökosystem</li>
+                                        <li>S7-Integration</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="ethercat">
+                        <div class="highlight-box">
+                            <h3>EtherCAT im Detail</h3>
+                            <div class="info-grid" style="margin-top: 20px;">
+                                <div class="info-card">
+                                    <h4>🌟 Hauptmerkmale</h4>
+                                    <ul style="text-align: left;">
+                                        <li>Von Beckhoff entwickelt</li>
+                                        <li>Ultra-schnell (&lt;100 µs)</li>
+                                        <li>Spezielle Hardware nötig</li>
+                                        <li>10+ Millionen Knoten weltweit</li>
+                                    </ul>
+                                </div>
+                                <div class="info-card">
+                                    <h4>✅ Ideale Anwendungen</h4>
+                                    <ul style="text-align: left;">
+                                        <li>High-Speed Motion Control</li>
+                                        <li>Präzisions-Robotik</li>
+                                        <li>Hochgeschwindigkeits-Maschinen</li>
+                                        <li>Synchrone Achsen</li>
+                                    </ul>
+                                </div>
+                                <div class="info-card">
+                                    <h4>🎯 Marktposition</h4>
+                                    <ul style="text-align: left;">
+                                        <li>Nische für High-Performance</li>
+                                        <li>Stark in Europa</li>
+                                        <li>Beckhoff-Ökosystem</li>
+                                        <li>Lizenzgebühren</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <h3>Wann welcher Feldbus?</h3>
                 <div class="info-grid">
@@ -1137,17 +2401,41 @@
                     "Was WLAN für uns ist,<br>ist EtherNet/IP für die Fabrik"
                 </div>
             </section>
+
+            <section id="quiz">
+                <h2>🎯 Wissensquiz: Teste dein EtherNet/IP Wissen!</h2>
+
+                <div class="quiz-container">
+                    <div class="quiz-header">
+                        <h2>Wie gut kennst du EtherNet/IP?</h2>
+                        <p style="font-size: 1.2em; color: #64748b;">Beantworte 10 Fragen und finde es heraus!</p>
+                        <div class="quiz-progress">
+                            <div class="quiz-progress-bar" id="quizProgressBar"></div>
+                        </div>
+                    </div>
+
+                    <div id="quizQuestions">
+                        <!-- Questions will be inserted here by JavaScript -->
+                    </div>
+
+                    <div class="quiz-results" id="quizResults">
+                        <div class="score-display" id="scoreDisplay"></div>
+                        <div class="result-message" id="resultMessage"></div>
+                        <div class="result-details" id="resultDetails"></div>
+                        <div class="quiz-buttons">
+                            <button class="quiz-button primary" onclick="restartQuiz()">🔄 Quiz neu starten</button>
+                            <button class="quiz-button secondary" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">📚 Zurück zum Handout</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
+
+        <canvas id="confetti-canvas"></canvas>
 
         <footer>
             <div class="footer-content">
-                <h3>Weiterführende Informationen</h3>
-                <div class="footer-links">
-                    <a href="https://www.odva.org" target="_blank">www.odva.org</a>
-                    <a href="https://www.ethernet-ip.org" target="_blank">www.ethernet-ip.org</a>
-                    <a href="https://www.bosch.com" target="_blank">www.bosch.com</a>
-                </div>
-                <p style="margin-top: 30px;">
+                <p>
                     <strong>Erstellt von:</strong> Benjamin Herrmann | HRL-TVT 4.5 | 10.11.2025<br>
                     Robert Bosch GmbH, Reutlingen<br>
                     © 2025. Alle Rechte vorbehalten.
@@ -1161,9 +2449,109 @@
     </div>
 
     <script>
+        // ========== ANIMATED NETWORK BACKGROUND ==========
+        const canvas = document.getElementById('network-canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Set canvas size
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        // Network nodes
+        class Node {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.radius = 3;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                // Bounce off edges
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(59, 130, 246, 0.6)';
+                ctx.fill();
+
+                // Glow effect
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = 'rgba(59, 130, 246, 0.8)';
+                ctx.fill();
+                ctx.shadowBlur = 0;
+            }
+        }
+
+        // Create nodes
+        const nodes = [];
+        const nodeCount = Math.min(50, Math.floor(window.innerWidth / 20));
+        for (let i = 0; i < nodeCount; i++) {
+            nodes.push(new Node());
+        }
+
+        // Draw connections
+        function drawConnections() {
+            for (let i = 0; i < nodes.length; i++) {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const dx = nodes[i].x - nodes[j].x;
+                    const dy = nodes[i].y - nodes[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 150) {
+                        ctx.beginPath();
+                        ctx.moveTo(nodes[i].x, nodes[i].y);
+                        ctx.lineTo(nodes[j].x, nodes[j].y);
+                        const opacity = (1 - distance / 150) * 0.3;
+                        ctx.strokeStyle = `rgba(59, 130, 246, ${opacity})`;
+                        ctx.lineWidth = 1;
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        // Animation loop
+        function animateNetwork() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Update and draw nodes
+            nodes.forEach(node => {
+                node.update();
+                node.draw();
+            });
+
+            // Draw connections
+            drawConnections();
+
+            requestAnimationFrame(animateNetwork);
+        }
+
+        // Start animation
+        animateNetwork();
+
+        // ========== EXISTING JAVASCRIPT ==========
         const scrollTop = document.getElementById('scrollTop');
-        
+        const progressBar = document.getElementById('progressBar');
+
+        // Progress bar update
         window.addEventListener('scroll', () => {
+            const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (window.scrollY / windowHeight) * 100;
+            progressBar.style.width = scrolled + '%';
+
+            // Scroll to top button
             if (window.pageYOffset > 300) {
                 scrollTop.classList.add('visible');
             } else {
@@ -1178,16 +2566,430 @@
             });
         });
 
+        // Smooth scroll for navigation
         document.querySelectorAll('nav a').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
+                const navHeight = document.querySelector('nav').offsetHeight;
+                const targetPosition = target.offsetTop - navHeight - 20;
+
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
                 });
             });
         });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+
+        // Flip Card Functionality
+        document.querySelectorAll('.flip-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.classList.toggle('flipped');
+            });
+        });
+
+        // Interactive Layer Functionality
+        document.querySelectorAll('.layer.interactive').forEach(layer => {
+            layer.addEventListener('click', function() {
+                // Close all other layers
+                document.querySelectorAll('.layer.interactive').forEach(l => {
+                    if (l !== this) {
+                        l.classList.remove('active');
+                    }
+                });
+                // Toggle current layer
+                this.classList.toggle('active');
+            });
+        });
+
+        // Accordion Functionality
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', function() {
+                const accordionContent = this.nextElementSibling;
+                const isActive = this.classList.contains('active');
+
+                // Close all accordions in the same accordion container
+                const accordion = this.closest('.accordion');
+                accordion.querySelectorAll('.accordion-header').forEach(h => {
+                    h.classList.remove('active');
+                    h.nextElementSibling.classList.remove('active');
+                });
+
+                // Open clicked accordion if it wasn't active
+                if (!isActive) {
+                    this.classList.add('active');
+                    accordionContent.classList.add('active');
+                }
+            });
+        });
+
+        // Tab Functionality
+        document.querySelectorAll('.tab-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const tabId = this.getAttribute('data-tab');
+                const tabsContainer = this.closest('.tabs');
+
+                // Remove active class from all buttons and contents in this tabs container
+                tabsContainer.querySelectorAll('.tab-button').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                tabsContainer.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+
+                // Add active class to clicked button and corresponding content
+                this.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Remove pulse animation after first interaction
+        document.querySelectorAll('.interactive-hint').forEach(element => {
+            element.addEventListener('click', function() {
+                this.classList.remove('interactive-hint');
+            }, { once: true });
+        });
+
+        // Add keyboard accessibility
+        document.querySelectorAll('.flip-card, .layer.interactive, .accordion-header, .tab-button').forEach(element => {
+            element.setAttribute('tabindex', '0');
+            element.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
+                }
+            });
+        });
+
+        // Console message for interactive elements
+        console.log('🎉 Interaktive Elemente geladen!');
+        console.log('📋 Flip-Cards: Klicke auf Karten um sie umzudrehen');
+        console.log('👆 OSI-Layer: Klicke auf Layer für Details');
+        console.log('📑 Tabs: Wechsle zwischen verschiedenen Ansichten');
+        console.log('📋 Akkordeons: Klicke auf Überschriften zum Auf-/Zuklappen');
+
+        // ========== ANIMATED COUNTERS ==========
+        function animateCounter(element, target, duration = 2000) {
+            const start = 0;
+            const increment = target / (duration / 16); // 60 FPS
+            let current = start;
+
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = Math.round(target);
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.round(current);
+                }
+            }, 16);
+        }
+
+        // Observe stat numbers and animate when visible
+        const statObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.dataset.animated) {
+                    const text = entry.target.textContent;
+                    const match = text.match(/(\d+)/);
+                    if (match) {
+                        const number = parseInt(match[0]);
+                        entry.target.dataset.animated = 'true';
+                        animateCounter(entry.target, number, 2000);
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+
+        // Apply to all stat-number elements
+        document.querySelectorAll('.stat-number').forEach(stat => {
+            statObserver.observe(stat);
+        });
+
+        // ========== QUIZ FUNCTIONALITY ==========
+        const quizQuestions = [
+            {
+                question: "Was bedeutet die Abkürzung EtherNet/IP?",
+                answers: ["Ethernet Internet Protocol", "Ethernet Industrial Protocol", "Ethernet Integrated Platform", "Ethernet IP-Address"],
+                correct: 1
+            },
+            {
+                question: "Welche Zykluszeiten bietet EtherNet/IP?",
+                answers: ["0,1-1 ms", "1-100 ms", "100-1000 ms", "1-10 Sekunden"],
+                correct: 1
+            },
+            {
+                question: "Wie viele Knoten sind weltweit installiert?",
+                answers: ["Über 10 Millionen", "Über 20 Millionen", "Über 30 Millionen", "Über 50 Millionen"],
+                correct: 2
+            },
+            {
+                question: "Welches Protokoll nutzt EtherNet/IP auf den oberen Layern (5-7)?",
+                answers: ["PROFIBUS", "CIP", "Modbus", "CANopen"],
+                correct: 1
+            },
+            {
+                question: "Welches Transportprotokoll wird für zeitkritische I/O-Daten verwendet?",
+                answers: ["TCP", "UDP", "HTTP", "FTP"],
+                correct: 1
+            },
+            {
+                question: "Welche Standard-Kabel werden verwendet?",
+                answers: ["Glasfaser", "CAT5e/CAT6", "Koaxial", "RS485"],
+                correct: 1
+            },
+            {
+                question: "In welcher Region ist EtherNet/IP besonders verbreitet?",
+                answers: ["Europa", "Afrika", "USA & Asien", "Australien"],
+                correct: 2
+            },
+            {
+                question: "Was ist der Hauptvorteil von EtherNet/IP gegenüber proprietären Lösungen?",
+                answers: ["Höhere Geschwindigkeit", "Standard-Hardware nutzbar", "Günstigere Kabel", "Kleinere Stecker"],
+                correct: 1
+            },
+            {
+                question: "Welche Verschlüsselung verwendet CIP Security?",
+                answers: ["DES", "AES", "RSA", "MD5"],
+                correct: 1
+            },
+            {
+                question: "Für wie viel Prozent der Industrie-Anwendungen ist EtherNet/IP ausreichend schnell?",
+                answers: ["50%", "70%", "90%", "100%"],
+                correct: 2
+            }
+        ];
+
+        let currentQuestion = 0;
+        let userAnswers = [];
+        let score = 0;
+
+        function initQuiz() {
+            currentQuestion = 0;
+            userAnswers = [];
+            score = 0;
+            document.getElementById('quizQuestions').innerHTML = '';
+            document.getElementById('quizResults').classList.remove('active');
+
+            quizQuestions.forEach((q, index) => {
+                const questionCard = document.createElement('div');
+                questionCard.className = 'question-card';
+                if (index === 0) questionCard.classList.add('active');
+
+                questionCard.innerHTML = `
+                    <div class="question-number">Frage ${index + 1} von ${quizQuestions.length}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="answers">
+                        ${q.answers.map((answer, i) => `
+                            <div class="answer-option" data-question="${index}" data-answer="${i}">
+                                <div class="answer-label">${String.fromCharCode(65 + i)}</div>
+                                <span>${answer}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="quiz-buttons">
+                        ${index > 0 ? '<button class="quiz-button secondary" onclick="previousQuestion()">← Zurück</button>' : ''}
+                        <button class="quiz-button primary" onclick="nextQuestion()" ${index === 0 ? 'style="margin-left: auto;"' : ''}>
+                            ${index === quizQuestions.length - 1 ? 'Ergebnis anzeigen →' : 'Weiter →'}
+                        </button>
+                    </div>
+                `;
+
+                document.getElementById('quizQuestions').appendChild(questionCard);
+            });
+
+            // Add click handlers to answers
+            document.querySelectorAll('.answer-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const questionIndex = parseInt(this.dataset.question);
+                    const answerIndex = parseInt(this.dataset.answer);
+
+                    // Remove selected from siblings
+                    this.parentElement.querySelectorAll('.answer-option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+
+                    // Mark this as selected
+                    this.classList.add('selected');
+                    userAnswers[questionIndex] = answerIndex;
+                });
+            });
+
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / quizQuestions.length) * 100;
+            document.getElementById('quizProgressBar').style.width = progress + '%';
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < quizQuestions.length - 1) {
+                document.querySelectorAll('.question-card')[currentQuestion].classList.remove('active');
+                currentQuestion++;
+                document.querySelectorAll('.question-card')[currentQuestion].classList.add('active');
+                updateProgress();
+            } else {
+                showResults();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                document.querySelectorAll('.question-card')[currentQuestion].classList.remove('active');
+                currentQuestion--;
+                document.querySelectorAll('.question-card')[currentQuestion].classList.add('active');
+                updateProgress();
+            }
+        }
+
+        function showResults() {
+            // Calculate score
+            score = 0;
+            quizQuestions.forEach((q, index) => {
+                if (userAnswers[index] === q.correct) {
+                    score++;
+                }
+            });
+
+            const percentage = Math.round((score / quizQuestions.length) * 100);
+
+            // Hide questions, show results
+            document.getElementById('quizQuestions').style.display = 'none';
+            document.getElementById('quizResults').classList.add('active');
+
+            // Display score
+            document.getElementById('scoreDisplay').textContent = `${score}/${quizQuestions.length}`;
+
+            // Result message based on score
+            let message = '';
+            if (percentage >= 90) {
+                message = '🏆 Hervorragend! Du bist ein EtherNet/IP Experte!';
+                launchConfetti();
+            } else if (percentage >= 70) {
+                message = '🎉 Sehr gut! Du hast das Thema gut verstanden!';
+                launchConfetti();
+            } else if (percentage >= 50) {
+                message = '👍 Gut gemacht! Noch ein bisschen üben!';
+            } else {
+                message = '📚 Lies das Handout nochmal durch!';
+            }
+            document.getElementById('resultMessage').textContent = message;
+
+            // Show detailed results
+            let detailsHTML = '<h3 style="margin-bottom: 20px;">Deine Antworten im Detail:</h3>';
+            quizQuestions.forEach((q, index) => {
+                const userAnswer = userAnswers[index];
+                const isCorrect = userAnswer === q.correct;
+
+                detailsHTML += `
+                    <div style="margin: 20px 0; padding: 20px; background: ${isCorrect ? '#d1fae5' : '#fee2e2'}; border-radius: 12px; border-left: 4px solid ${isCorrect ? '#10b981' : '#ef4444'};">
+                        <div style="font-weight: 600; margin-bottom: 10px;">${index + 1}. ${q.question}</div>
+                        <div style="color: ${isCorrect ? '#065f46' : '#991b1b'};">
+                            ${isCorrect ? '✓' : '✗'} Deine Antwort: ${userAnswer !== undefined ? q.answers[userAnswer] : 'Keine Antwort'}
+                        </div>
+                        ${!isCorrect ? `<div style="color: #065f46; margin-top: 5px;">✓ Richtig wäre: ${q.answers[q.correct]}</div>` : ''}
+                    </div>
+                `;
+            });
+            document.getElementById('resultDetails').innerHTML = detailsHTML;
+        }
+
+        function restartQuiz() {
+            initQuiz();
+            document.getElementById('quizQuestions').style.display = 'block';
+            window.scrollTo({top: document.getElementById('quiz').offsetTop - 100, behavior: 'smooth'});
+        }
+
+        // ========== CONFETTI EFFECT ==========
+        function launchConfetti() {
+            const canvas = document.getElementById('confetti-canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const confettiPieces = [];
+            const colors = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899'];
+
+            class ConfettiPiece {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = -20;
+                    this.size = Math.random() * 10 + 5;
+                    this.speedY = Math.random() * 3 + 2;
+                    this.speedX = Math.random() * 2 - 1;
+                    this.color = colors[Math.floor(Math.random() * colors.length)];
+                    this.rotation = Math.random() * 360;
+                    this.rotationSpeed = Math.random() * 10 - 5;
+                }
+
+                update() {
+                    this.y += this.speedY;
+                    this.x += this.speedX;
+                    this.rotation += this.rotationSpeed;
+                }
+
+                draw() {
+                    ctx.save();
+                    ctx.translate(this.x, this.y);
+                    ctx.rotate(this.rotation * Math.PI / 180);
+                    ctx.fillStyle = this.color;
+                    ctx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size);
+                    ctx.restore();
+                }
+            }
+
+            // Create confetti pieces
+            for (let i = 0; i < 150; i++) {
+                confettiPieces.push(new ConfettiPiece());
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                confettiPieces.forEach((piece, index) => {
+                    piece.update();
+                    piece.draw();
+
+                    // Remove pieces that are off screen
+                    if (piece.y > canvas.height) {
+                        confettiPieces.splice(index, 1);
+                    }
+                });
+
+                if (confettiPieces.length > 0) {
+                    requestAnimationFrame(animate);
+                } else {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                }
+            }
+
+            animate();
+        }
+
+        // Initialize quiz when page loads
+        window.addEventListener('load', initQuiz);
     </script>
 </body>
 </html>
